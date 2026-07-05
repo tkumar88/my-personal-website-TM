@@ -1,0 +1,41 @@
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCbfy9TvoodKFuy5sFvr-RwTWG_mz2mOLw",
+  authDomain: "mylifedashboard-94964.firebaseapp.com",
+  projectId: "mylifedashboard-94964",
+  storageBucket: "mylifedashboard-94964.firebasestorage.app",
+  messagingSenderId: "590572591968",
+  appId: "1:590572591968:web:59304a73eb99cfdb795c05",
+  measurementId: "G-PK617NT7KB"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.saveToFirebase = async function(category, text) {
+  await addDoc(collection(db, category), {
+    text: text,
+    createdAt: new Date()
+  });
+};
+
+window.loadFromFirebase = async function(category) {
+  const querySnapshot = await getDocs(collection(db, category));
+
+  let html = "";
+
+  querySnapshot.forEach((doc) => {
+    html += `<div class="item">${doc.data().text}</div>`;
+  });
+
+  document.getElementById("items").innerHTML = html;
+};
+</script>
