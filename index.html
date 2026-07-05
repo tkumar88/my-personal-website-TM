@@ -3,145 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Life OS</title>
+<title>My Memory Vault</title>
 
 <style>
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter,Segoe UI,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
 }
 
 body{
-  min-height:100vh;
-  background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
-  color:white;
-  padding:20px;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+min-height:100vh;
+color:white;
+padding:30px;
 }
 
 .header{
-  max-width:1200px;
-  margin:auto;
-  margin-bottom:25px;
+text-align:center;
+margin-bottom:40px;
 }
 
-.welcome{
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(15px);
-  border-radius:25px;
-  padding:25px;
-  border:1px solid rgba(255,255,255,.15);
+.header h1{
+font-size:52px;
 }
 
-.welcome h1{
-  font-size:42px;
-}
-
-.welcome p{
-  color:#cbd5e1;
-  margin-top:10px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-  margin-top:20px;
-}
-
-.stat{
-  background:rgba(255,255,255,.08);
-  padding:20px;
-  border-radius:20px;
-  text-align:center;
-}
-
-.stat h2{
-  font-size:30px;
+.header p{
+color:#cbd5e1;
+margin-top:10px;
 }
 
 .grid{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+max-width:1400px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
 }
 
 .card{
-  height:180px;
-  border-radius:25px;
-  padding:25px;
-  cursor:pointer;
-  transition:.3s;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.15);
+border-radius:25px;
+overflow:hidden;
+cursor:pointer;
+transition:.3s;
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.03);
+transform:translateY(-8px);
 }
 
-.card .emoji{
-  font-size:50px;
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card-content{
+padding:20px;
 }
 
 .card h3{
-  margin-top:15px;
-  font-size:24px;
+font-size:28px;
+margin-bottom:8px;
 }
 
-.red{background:linear-gradient(135deg,#ef4444,#f97316);}
-.blue{background:linear-gradient(135deg,#0ea5e9,#2563eb);}
-.green{background:linear-gradient(135deg,#22c55e,#16a34a);}
-.gold{background:linear-gradient(135deg,#f59e0b,#facc15);}
-.pink{background:linear-gradient(135deg,#ec4899,#f43f5e);}
-.purple{background:linear-gradient(135deg,#8b5cf6,#6366f1);}
-.teal{background:linear-gradient(135deg,#14b8a6,#06b6d4);}
-.slate{background:linear-gradient(135deg,#475569,#1e293b);}
-
-.section{
-  display:none;
-  max-width:1200px;
-  margin:25px auto;
-  background:white;
-  color:black;
-  border-radius:25px;
-  padding:25px;
+.card p{
+color:#cbd5e1;
 }
 
-.section h2{
-  margin-bottom:20px;
+.memory-box{
+margin-top:40px;
+max-width:1200px;
+margin-left:auto;
+margin-right:auto;
+background:white;
+color:black;
+padding:25px;
+border-radius:25px;
 }
 
-.input-row{
-  display:flex;
-  gap:10px;
+.memory-box h2{
+margin-bottom:15px;
 }
 
-.input-row input{
-  flex:1;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #ddd;
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:1px solid #ddd;
+border-radius:10px;
 }
 
-.input-row button{
-  background:#2563eb;
-  color:white;
-  border:none;
-  padding:12px 20px;
-  border-radius:10px;
-  cursor:pointer;
+button{
+margin-top:15px;
+padding:12px 20px;
+background:#2563eb;
+border:none;
+color:white;
+border-radius:10px;
+cursor:pointer;
 }
 
-.item{
-  background:#f8fafc;
-  padding:12px;
-  margin-top:10px;
-  border-radius:10px;
+.memory{
+background:#f1f5f9;
+padding:15px;
+border-radius:12px;
+margin-top:12px;
 }
 </style>
 </head>
@@ -149,136 +120,116 @@ body{
 <body>
 
 <div class="header">
-  <div class="welcome">
-    <h1>👋 Welcome Back, Tharun</h1>
-    <p>Your Personal Life OS</p>
-
-    <div class="stats">
-      <div class="stat">
-        <h2>🎬</h2>
-        Movies
-      </div>
-
-      <div class="stat">
-        <h2>✈️</h2>
-        Trips
-      </div>
-
-      <div class="stat">
-        <h2>💰</h2>
-        Expenses
-      </div>
-
-      <div class="stat">
-        <h2>✅</h2>
-        Tasks
-      </div>
-    </div>
-  </div>
+    <h1>📸 My Memory Vault</h1>
+    <p>Movies, Trips, Food, Expenses, Notes & Life Memories</p>
 </div>
 
 <div class="grid">
 
-<div class="card red" onclick="openCategory('Movies')">
-  <div class="emoji">🎬</div>
-  <h3>Movies</h3>
+<div class="card" onclick="openCategory('Movies')">
+9599849927-2ee91cede3ba?w=800">
+<div class="card-content">
+<h3>🎬 Movies</h3>
+<p>Movies you've watched</p>
+</div>
 </div>
 
-<div class="card blue" onclick="openCategory('Trips')">
-  <div class="emoji">✈️</div>
-  <h3>Trips</h3>
+<div class="card" onclick="openCategory('Trips')">
+7375-aaad61436b1b?w=800">
+<div class="card-content">
+<h3>✈️ Trips</h3>
+<p>Travel memories & photos</p>
+</div>
 </div>
 
-<div class="card gold" onclick="openCategory('Expenses')">
-  <div class="emoji">💰</div>
-  <h3>Expenses</h3>
+<div class="card" onclick="openCategory('Food')">
+<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc<div class="card-content">
+<h3>🍕 Food</h3>
+<p>Restaurants & meals</p>
+</div>
 </div>
 
-<div class="card green" onclick="openCategory('Groceries')">
-  <div class="emoji">🛒</div>
-  <h3>Groceries</h3>
+<div class="card" onclick="openCategory('Expenses')">
+/photo-1554224155-6726b3ff858f?w=800">
+<div class="card-content">
+<h3>💰 Expenses</h3>
+<p>Money spent</p>
+</div>
 </div>
 
-<div class="card pink" onclick="openCategory('Food')">
-  <div class="emoji">🍕</div>
-  <h3>What To Eat</h3>
+<div class="card" onclick="openCategory('Notes')">
+<img src="https://images.unsplash.com/photo-145539058ead277a?w=800
+<div class="card-content">
+<h3>📝 Notes</h3>
+<p>Ideas & thoughts</p>
+</div>
 </div>
 
-<div class="card purple" onclick="openCategory('Planner')">
-  <div class="emoji">📅</div>
-  <h3>Tomorrow</h3>
+<div class="card" onclick="openCategory('Tomorrow')">
+https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800">
+<div class="card-content">
+<h3>📅 Tomorrow</h3>
+<p>Plan your next day</p>
 </div>
-
-<div class="card teal" onclick="openCategory('Tasks')">
-  <div class="emoji">✅</div>
-  <h3>Tasks</h3>
-</div>
-
-<div class="card slate" onclick="openCategory('Notes')">
-  <div class="emoji">📝</div>
-  <h3>Notes</h3>
 </div>
 
 </div>
 
-<div id="section" class="section">
-  <h2 id="title"></h2>
+<div class="memory-box" id="section" style="display:none;">
 
-  <div class="input-row">
-    <input id="userInput" placeholder="Add item...">
-    <button onclick="saveItem()">Add</button>
-  </div>
+<h2 id="title"></h2>
 
-  <div id="items"></div>
+<input id="memoryTitle" placeholder="Title">
+
+<input id="memoryPhoto" placeholder="Paste photo URL">
+
+<textarea id="memoryNotes" rows="4" placeholder="Write memory..."></textarea>
+
+<button onclick="saveMemory()">Save Memory</button>
+
+<div id="list"></div>
+
 </div>
 
 <script>
 
 let currentCategory="";
 
-function openCategory(category){
+function openCategory(cat){
+currentCategory=cat;
 
- currentCategory=category;
-
- document.getElementById("section").style.display="block";
- document.getElementById("title").innerText=category;
-
- loadItems();
+document.getElementById("section").style.display="block";
+document.getElementById("title").innerText=cat;
 }
 
-function saveItem(){
+function saveMemory(){
 
- const input=document.getElementById("userInput");
+const title=document.getElementById("memoryTitle").value;
+const photo=document.getElementById("memoryPhoto").value;
+const notes=document.getElementById("memoryNotes").value;
 
- if(!input.value) return;
+const html=`
 
- let items=JSON.parse(
-   localStorage.getItem(currentCategory) || "[]"
- );
+<div class="memory">
 
- items.push(input.value);
+${photo ? `${photo}` : ''}
 
- localStorage.setItem(
-   currentCategory,
-   JSON.stringify(items)
- );
+<h3>${title}</h3>
 
- input.value="";
+<p>${notes}</p>
 
- loadItems();
+</div>
+
+`;
+
+document.getElementById("list").innerHTML += html;
+
+document.getElementById("memoryTitle").value="";
+document.getElementById("memoryPhoto").value="";
+document.getElementById("memoryNotes").value="";
 }
-
-function loadItems(){
-
- let items=JSON.parse(
-   localStorage.getItem(currentCategory) || "[]"
- );
-
- document.getElementById("items").innerHTML=
- items.map(x=>`<div class='item'>${x}</div>`).join("");
-}
-
 </script>
 
 </body>
 </html>
+`
