@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>🌿 Life Journal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍃 My Life OS</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -15,26 +14,22 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#edf5f3;
+background:#edf4f2;
 padding:25px;
 color:#444;
 }
 
 .hero{
-max-width:1200px;
-margin:auto;
-padding:35px;
-text-align:center;
-
-background:rgba(189,231,223,.7);
+background:rgba(184,228,217,.8);
 backdrop-filter:blur(20px);
-
+padding:40px;
 border-radius:30px;
-border:1px solid rgba(255,255,255,.4);
+text-align:center;
+margin-bottom:25px;
 }
 
 .hero h1{
-font-size:50px;
+font-size:52px;
 }
 
 .hero p{
@@ -43,24 +38,21 @@ color:#666;
 }
 
 .grid{
-max-width:1200px;
-margin:30px auto;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
+max-width:1400px;
+margin:auto;
 }
 
 .card{
-background:rgba(255,255,255,.65);
-backdrop-filter:blur(16px);
-
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(20px);
 border-radius:24px;
 padding:25px;
-
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+border-top:8px solid #9fd9cd;
 cursor:pointer;
-
-box-shadow:0 8px 20px rgba(0,0,0,.06);
-
 transition:.3s;
 }
 
@@ -69,75 +61,84 @@ transform:translateY(-5px);
 }
 
 .icon{
-font-size:40px;
+font-size:42px;
 margin-bottom:10px;
 }
 
 .card h3{
-font-size:28px;
+font-size:32px;
+margin-bottom:6px;
 }
 
 .card p{
-margin-top:8px;
-color:#666;
+color:#777;
 }
 
 .panel{
 display:none;
-
-margin-top:20px;
-
+margin-top:15px;
 background:white;
-border-radius:20px;
-
 padding:20px;
+border-radius:20px;
 }
 
 .panel input{
 width:100%;
 padding:12px;
-margin-bottom:10px;
+margin:6px 0;
 border:1px solid #ddd;
 border-radius:12px;
 }
 
 .panel button{
-background:#b9e5dd;
-border:none;
 padding:12px 20px;
+background:#9fd9cd;
+border:none;
 border-radius:12px;
 cursor:pointer;
 font-weight:600;
 }
 
 .entry{
-margin-top:12px;
-padding:15px;
-background:#f5fafa;
+margin-top:10px;
+padding:12px;
+background:#f7fbfa;
 border-left:4px solid #9fd9cd;
 border-radius:12px;
 }
 
-.date{
-font-size:13px;
-color:#888;
-margin-bottom:5px;
+.activity{
+max-width:1400px;
+margin:30px auto;
+background:white;
+padding:25px;
+border-radius:24px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
+.activity h2{
+margin-bottom:20px;
+}
+
+.activity-item{
+display:flex;
+justify-content:space-between;
+padding:14px;
+border-bottom:1px solid #eee;
+}
 </style>
 </head>
 
 <body>
 
 <div class="hero">
-<h1>🌿 Life Journal</h1>
-<p>Your personal timeline</p>
+<h1>🍃 My Life OS</h1>
+<p>Capture • Organize • Remember</p>
 </div>
 
 <div class="grid">
 
 <div>
-
 <div class="card" onclick="togglePanel('movies')">
 <div class="icon">🎬</div>
 <h3>Movies</h3>
@@ -145,29 +146,18 @@ margin-bottom:5px;
 </div>
 
 <div class="panel" id="movies">
-
 <input type="date">
-
 <input placeholder="Movie Name">
-
 <button>Add Movie</button>
 
 <div class="entry">
-<div class="date">2026-07-04</div>
-Interstellar ⭐⭐⭐⭐⭐
+<strong>Interstellar</strong><br>
+04 Jul 2026
 </div>
-
-<div class="entry">
-<div class="date">2026-07-01</div>
-Top Gun Maverick
 </div>
-
-</div>
-
 </div>
 
 <div>
-
 <div class="card" onclick="togglePanel('trips')">
 <div class="icon">✈️</div>
 <h3>Trips</h3>
@@ -175,19 +165,13 @@ Top Gun Maverick
 </div>
 
 <div class="panel" id="trips">
-
 <input type="date">
-
 <input placeholder="Trip Name">
-
 <button>Add Trip</button>
-
 </div>
-
 </div>
 
 <div>
-
 <div class="card" onclick="togglePanel('expenses')">
 <div class="icon">💰</div>
 <h3>Expenses</h3>
@@ -195,21 +179,56 @@ Top Gun Maverick
 </div>
 
 <div class="panel" id="expenses">
-
 <input type="date">
-
 <input placeholder="Description">
-
 <input placeholder="Amount">
-
 <button>Add Expense</button>
-
 </div>
-
 </div>
 
 <div>
+<div class="card" onclick="togglePanel('groceries')">
+<div class="icon">🛒</div>
+<h3>Groceries</h3>
+<p>Shopping history</p>
+</div>
 
+<div class="panel" id="groceries">
+<input type="date">
+<input placeholder="Grocery Item">
+<button>Add Grocery</button>
+</div>
+</div>
+
+<div>
+<div class="card" onclick="togglePanel('food')">
+<div class="icon">🍕</div>
+<h3>Food</h3>
+<p>What to eat</p>
+</div>
+
+<div class="panel" id="food">
+<input type="date">
+<input placeholder="Food Item">
+<button>Add Food</button>
+</div>
+</div>
+
+<div>
+<div class="card" onclick="togglePanel('cricket')">
+<div class="icon">🏏</div>
+<h3>Cricket</h3>
+<p>Matches & practice</p>
+</div>
+
+<div class="panel" id="cricket">
+<input type="date">
+<input placeholder="Match / Practice">
+<button>Add Cricket Entry</button>
+</div>
+</div>
+
+<div>
 <div class="card" onclick="togglePanel('notes')">
 <div class="icon">📝</div>
 <h3>Notes</h3>
@@ -217,41 +236,84 @@ Top Gun Maverick
 </div>
 
 <div class="panel" id="notes">
-
 <input type="date">
-
 <input placeholder="Note">
-
 <button>Add Note</button>
+</div>
+</div>
+
+<div>
+<div class="card" onclick="togglePanel('goals')">
+<div class="icon">✅</div>
+<h3>Goals</h3>
+<p>Things to achieve</p>
+</div>
+
+<div class="panel" id="goals">
+<input type="date">
+<input placeholder="Goal">
+<button>Add Goal</button>
+</div>
+</div>
+
+<div>
+<div class="card" onclick="togglePanel('tomorrow')">
+<div class="icon">📅</div>
+<h3>Tomorrow</h3>
+<p>Plan next day</p>
+</div>
+
+<div class="panel" id="tomorrow">
+<input type="date">
+<input placeholder="Tomorrow Task">
+<button>Add Task</button>
+</div>
+</div>
 
 </div>
 
+<div class="activity">
+
+<h2>🌿 Recent Activity</h2>
+
+<div class="activity-item">
+<span>🎬 Interstellar</span>
+<span>04 Jul 2026</span>
+</div>
+
+<div class="activity-item">
+<span>✈️ Chicago Trip</span>
+<span>03 Jul 2026</span>
+</div>
+
+<div class="activity-item">
+<span>💰 Costco - $82</span>
+<span>02 Jul 2026</span>
+</div>
+
+<div class="activity-item">
+<span>🏏 Cricket Practice</span>
+<span>01 Jul 2026</span>
 </div>
 
 </div>
 
 <script>
-
 function togglePanel(id){
 
-document
-.querySelectorAll('.panel')
-.forEach(p=>{
-
-if(p.id!==id)
-p.style.display='none';
-
+document.querySelectorAll('.panel').forEach(panel=>{
+if(panel.id!==id){
+panel.style.display='none';
+}
 });
 
 const panel=document.getElementById(id);
 
 panel.style.display=
 panel.style.display==='block'
-?'none'
-:'block';
-
+? 'none'
+: 'block';
 }
-
 </script>
 
 </body>
