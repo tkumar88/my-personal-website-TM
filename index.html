@@ -1,103 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Templates</title>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>My Life Dashboard</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#f5f5f5}
-.container{display:flex;height:100vh}
-.sidebar{
- width:260px;
- background:#fff;
- border-right:1px solid #ddd;
- padding:20px;
- overflow:auto;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+body{
+background:linear-gradient(135deg,#0f172a,#1e293b);
+min-height:100vh;
+padding:40px;
+color:white;
 }
-.sidebar h3{color:#f4a23a;margin-bottom:20px}
-.menu-item{
- padding:12px;
- border-radius:10px;
- margin-bottom:8px;
- cursor:pointer;
-}
-.menu-item:hover,.active{
- background:#fff3df;
- color:#f4a23a;
-}
-.content{
- flex:1;
- padding:40px;
-}
-.content h1{
- font-size:48px;
- margin-bottom:40px;
-}
-.cards{
- display:flex;
- gap:30px;
- flex-wrap:wrap;
+.header{text-align:center;margin-bottom:40px}
+.header h1{font-size:56px}
+.header p{color:#cbd5e1;margin-top:10px}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+max-width:1400px;
+margin:auto;
 }
 .card{
- width:220px;
+text-decoration:none;
+color:white;
+padding:30px;
+border-radius:24px;
+backdrop-filter:blur(12px);
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
+transition:.3s;
+min-height:180px;
+display:flex;
+flex-direction:column;
+justify-content:center;
 }
-.card-preview{
- height:300px;
- background:#fff;
- border-radius:12px;
- box-shadow:0 2px 10px rgba(0,0,0,.1);
- display:flex;
- align-items:center;
- justify-content:center;
- font-weight:bold;
+.card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
-.selected .card-preview{
- border:4px solid orange;
-}
-.card-title{
- text-align:center;
- margin-top:10px;
- font-size:18px;
-}
+.icon{font-size:52px}
+.title{font-size:26px;font-weight:700;margin-top:15px}
+.desc{color:#cbd5e1;margin-top:10px;line-height:1.5}
+.movies{background:linear-gradient(135deg,#ef4444,#f97316)}
+.trips{background:linear-gradient(135deg,#06b6d4,#3b82f6)}
+.todo{background:linear-gradient(135deg,#22c55e,#16a34a)}
+.expenses{background:linear-gradient(135deg,#f59e0b,#eab308)}
+.groceries{background:linear-gradient(135deg,#10b981,#14b8a6)}
+.food{background:linear-gradient(135deg,#ec4899,#f43f5e)}
+.tomorrow{background:linear-gradient(135deg,#8b5cf6,#6366f1)}
+.notes{background:linear-gradient(135deg,#64748b,#334155)}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="sidebar">
-    <h3>All Templates</h3>
-    <div class="menu-item">Recents</div>
-    <div class="menu-item">Basic</div>
-    <div class="menu-item">Premium</div>
-    <div class="menu-item">Reports</div>
-    <div class="menu-item">Education</div>
-    <div class="menu-item">Certificates</div>
-    <div class="menu-item">Business</div>
-    <div class="menu-item">Books</div>
-    <div class="menu-item">Cards</div>
-    <div class="menu-item active">My Templates</div>
-  </div>
+<div class='header'>
+<h1>🏠 My Life Dashboard</h1>
+<p>Your personal hub for movies, trips, expenses, groceries, plans and notes.</p>
+</div>
 
-  <div class="content">
-    <h1>My Templates</h1>
-
-    <div class="cards">
-      <div class="card selected">
-        <div class="card-preview">Template 1</div>
-        <div class="card-title">Template Name</div>
-      </div>
-
-      <div class="card">
-        <div class="card-preview" style="background:#f3dd72">Template 2</div>
-        <div class="card-title">Press Kit</div>
-      </div>
-
-      <div class="card">
-        <div class="card-preview">Template 3</div>
-        <div class="card-title">Letter Template</div>
-      </div>
-    </div>
-  </div>
+<div class='grid'>
+movies.html<div class='icon'>🎬</div><div class='title'>Movies Watched</div><div class='desc'>Track movies, ratings and reviews.</div></a>
+<a class='card trips' href='trips.html'><div class='icon'>✈️</div><div class='title'>Trips</div><div class='desc'>Places visited, photos and memories.</div></a>
+<a class='card todo' href='todo.html'><div class='icon'>✅</div><div class='title'>To Do List</div><div class='desc'>Tasks, goals and reminders.</div></a>
+<a class='card expenses' href='expenses.html'><div class='icon'>💰</div><div class='title'>Money Spent</div><div class='desc'>Expenses and spending history.</div></a>
+<a class='card groceries' href='groceries.html'><div class='icon'>🛒</div><div class='title'>Groceries</div><div class='desc'>Shopping lists and purchases.</div></a>
+<a class='card food' href='food.html'><div class='icon'>🍕</div><div class='title'>What To Eat</div><div class='desc'>Meal ideas and favorite foods.</div></a>
+<a class='card tomorrow' href='tomorrow.html'><div class='icon'>📅</div><div class='title'>Tomorrow Planner</div><div class='desc'>Plan your next day.</div></a>
+<a class='card notes' href='notes.html'><div class='icon'>📝</div><div class='title'>Notes</div><div class='desc'>Quick thoughts and ideas.</div></a>
 </div>
 </body>
 </html>
