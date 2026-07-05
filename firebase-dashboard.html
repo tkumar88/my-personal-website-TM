@@ -58,12 +58,13 @@ h1{
 }
 
 input{
-    width:75%;
+    width:70%;
     padding:10px;
 }
 
 button{
     padding:10px;
+    cursor:pointer;
 }
 
 .item{
@@ -80,66 +81,97 @@ button{
 <h1>🏠 My Life Dashboard</h1>
 
 <div class="grid">
-
-<div class="card movies" onclick="openCat('Movies')">
-🎬 Movies
-</div>
-
-<div class="card trips" onclick="openCat('Trips')">
-✈️ Trips
-</div>
-
-<div class="card expenses" onclick="openCat('Expenses')">
-💰 Expenses
-</div>
-
-<div class="card groceries" onclick="openCat('Groceries')">
-🛒 Groceries
-</div>
-
-<div class="card food" onclick="openCat('Food')">
-🍕 Food
-</div>
-
-<div class="card notes" onclick="openCat('Notes')">
-📝 Notes
-</div>
-
+    <div class="card movies" onclick="openCat('Movies')">🎬 Movies</div>
+    <div class="card trips" onclick="openCat('Trips')">✈️ Trips</div>
+    <div class="card expenses" onclick="openCat('Expenses')">💰 Expenses</div>
+    <div class="card groceries" onclick="openCat('Groceries')">🛒 Groceries</div>
+    <div class="card food" onclick="openCat('Food')">🍕 Food</div>
+    <div class="card notes" onclick="openCat('Notes')">📝 Notes</div>
 </div>
 
 <div id="content">
     <h2 id="title"></h2>
 
-    <input id="txt" placeholder="Type something...">
+    <input id="txt" placeholder="Add item">
     <button onclick="addItem()">Add</button>
 
     <div id="list"></div>
 </div>
 
-<script>
+<script type="module">
 
-let current='';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
-function openCat(cat){
-    current=cat;
-    document.getElementById('content').style.display='block';
-    document.getElementById('title').innerText=cat;
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCbfy9TvoodKFuy5sFvr-RwTWG_mz2mOLw",
+  authDomain: "mylifedashboard-94964.firebaseapp.com",
+  projectId: "mylifedashboard-94964",
+  storageBucket: "mylifedashboard-94964.firebasestorage.app",
+  messagingSenderId: "590572591968",
+  appId: "1:590572591968:web:59304a73eb99cfdb795c05",
+  measurementId: "G-PK617NT7KB"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let currentCategory = "";
+
+window.openCat = async function(category){
+
+    currentCategory = category;
+
+    document.getElementById("content").style.display = "block";
+    document.getElementById("title").innerText = category;
+
+    loadItems();
 }
 
-function addItem(){
+window.addItem = async function(){
 
-    let text=document.getElementById('txt').value;
+    const text = document.getElementById("txt").value;
 
-    if(text==='') return;
+    if(!text) return;
 
-    let div=document.createElement('div');
+    await addDoc(collection(db,currentCategory),{
+        item:text,
+        createdAt:new Date()
+    });
 
-    div.className='item';
-    div.innerText=text;
+    document.getElementById("txt").value="";
 
-    document.getElementById('list').appendChild(div);
+    loadItems();
+}
 
-    document.getElementById('txt').value='';
+async function loadItems(){
+
+    const q = query(
+        collection(db,currentCategory),
+        orderBy("createdAt","desc")
+    );
+
+    const snapshot = await getDocs(q);
+
+    let html = "";
+
+    snapshot.forEach((doc)=>{
+        html += `
+        <div class="item">
+            ${doc.data().item}
+        </div>
+        `;
+    });
+
+    document.getElementById("list").innerHTML = html;
 }
 
 </script>
