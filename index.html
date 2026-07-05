@@ -2,72 +2,45 @@
 <html>
 <head>
 <meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
 <title>My Life Dashboard</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{
-background:linear-gradient(135deg,#0f172a,#1e293b);
-min-height:100vh;
-padding:40px;
-color:white;
-}
-.header{text-align:center;margin-bottom:40px}
-.header h1{font-size:56px}
-.header p{color:#cbd5e1;margin-top:10px}
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-max-width:1400px;
-margin:auto;
-}
-.card{
-text-decoration:none;
-color:white;
-padding:30px;
-border-radius:24px;
-backdrop-filter:blur(12px);
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.15);
-transition:.3s;
-min-height:180px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-}
-.card:hover{
-transform:translateY(-10px) scale(1.03);
-box-shadow:0 20px 40px rgba(0,0,0,.35);
-}
-.icon{font-size:52px}
-.title{font-size:26px;font-weight:700;margin-top:15px}
-.desc{color:#cbd5e1;margin-top:10px;line-height:1.5}
-.movies{background:linear-gradient(135deg,#ef4444,#f97316)}
-.trips{background:linear-gradient(135deg,#06b6d4,#3b82f6)}
-.todo{background:linear-gradient(135deg,#22c55e,#16a34a)}
-.expenses{background:linear-gradient(135deg,#f59e0b,#eab308)}
-.groceries{background:linear-gradient(135deg,#10b981,#14b8a6)}
-.food{background:linear-gradient(135deg,#ec4899,#f43f5e)}
-.tomorrow{background:linear-gradient(135deg,#8b5cf6,#6366f1)}
-.notes{background:linear-gradient(135deg,#64748b,#334155)}
+body{margin:0;font-family:Segoe UI,sans-serif;background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff}
+.header{text-align:center;padding:30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:20px;max-width:1200px;margin:auto}
+.card{padding:25px;border-radius:20px;cursor:pointer;transition:.3s;color:#fff;font-weight:700}
+.card:hover{transform:translateY(-5px)}
+.movies{background:#ef4444}.trips{background:#3b82f6}.todo{background:#22c55e}.expenses{background:#f59e0b}.groceries{background:#14b8a6}.food{background:#ec4899}.tomorrow{background:#8b5cf6}.notes{background:#64748b}
+#section{max-width:900px;margin:20px auto;background:#fff;color:#111;padding:20px;border-radius:20px;display:none}
+input{width:75%;padding:10px}button{padding:10px 15px}.item{padding:10px;border-bottom:1px solid #ddd}
 </style>
 </head>
 <body>
 <div class='header'>
 <h1>🏠 My Life Dashboard</h1>
-<p>Your personal hub for movies, trips, expenses, groceries, plans and notes.</p>
+<p>Click a category and save items in your browser.</p>
 </div>
-
 <div class='grid'>
-movies.html<div class='icon'>🎬</div><div class='title'>Movies Watched</div><div class='desc'>Track movies, ratings and reviews.</div></a>
-<a class='card trips' href='trips.html'><div class='icon'>✈️</div><div class='title'>Trips</div><div class='desc'>Places visited, photos and memories.</div></a>
-<a class='card todo' href='todo.html'><div class='icon'>✅</div><div class='title'>To Do List</div><div class='desc'>Tasks, goals and reminders.</div></a>
-<a class='card expenses' href='expenses.html'><div class='icon'>💰</div><div class='title'>Money Spent</div><div class='desc'>Expenses and spending history.</div></a>
-<a class='card groceries' href='groceries.html'><div class='icon'>🛒</div><div class='title'>Groceries</div><div class='desc'>Shopping lists and purchases.</div></a>
-<a class='card food' href='food.html'><div class='icon'>🍕</div><div class='title'>What To Eat</div><div class='desc'>Meal ideas and favorite foods.</div></a>
-<a class='card tomorrow' href='tomorrow.html'><div class='icon'>📅</div><div class='title'>Tomorrow Planner</div><div class='desc'>Plan your next day.</div></a>
-<a class='card notes' href='notes.html'><div class='icon'>📝</div><div class='title'>Notes</div><div class='desc'>Quick thoughts and ideas.</div></a>
+<div class='card movies' onclick="openCat('Movies Watched')">🎬 Movies</div>
+<div class='card trips' onclick="openCat('Trips')">✈️ Trips</div>
+<div class='card todo' onclick="openCat('To Do')">✅ To Do</div>
+<div class='card expenses' onclick="openCat('Money Spent')">💰 Expenses</div>
+<div class='card groceries' onclick="openCat('Groceries')">🛒 Groceries</div>
+<div class='card food' onclick="openCat('What To Eat')">🍕 Food</div>
+<div class='card tomorrow' onclick="openCat('Tomorrow Plan')">📅 Tomorrow</div>
+<div class='card notes' onclick="openCat('Notes')">📝 Notes</div>
 </div>
+<div id='section'>
+<h2 id='title'></h2><br>
+<input id='txt' placeholder='Add an item'>
+<button onclick='addItem()'>Add</button>
+<div id='list'></div>
+</div>
+<script>
+let current='';
+function openCat(cat){current=cat;document.getElementById('section').style.display='block';document.getElementById('title').innerText=cat;loadItems();}
+function addItem(){let v=document.getElementById('txt').value;if(!v)return;let a=JSON.parse(localStorage.getItem(current)||'[]');a.push(v);localStorage.setItem(current,JSON.stringify(a));document.getElementById('txt').value='';loadItems();}
+function loadItems(){let a=JSON.parse(localStorage.getItem(current)||'[]');document.getElementById('list').innerHTML=a.map(x=>'<div class="item">'+x+'</div>').join('');}
+</script>
 </body>
 </html>
