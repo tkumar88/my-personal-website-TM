@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🛒 Groceries</title>
+
+<style>
+body{background:#eef4f2;font-family:Segoe UI;padding:20px;}
+.header{background:#b8e4d9;padding:25px;border-radius:20px;text-align:center;margin-bottom:20px;}
+input{width:100%;padding:12px;margin:10px 0;border:1px solid #ddd;border-radius:10px;}
+button{padding:12px 20px;background:#9fd9cd;border:none;border-radius:10px;}
+.card{background:white;padding:15px;border-radius:15px;margin-top:10px;}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>🛒 Groceries</h1>
+</div>
+
+<input type="date" id="date">
+<input placeholder="Grocery Item" id="name">
+
+<button onclick="addGrocery()">Add Grocery</button>
+
+<div id="list"></div>
+
+<script>
+function addGrocery(){
+const date=document.getElementById("date").value;
+const name=document.getElementById("name").value;
+
+if(!date || !name) return;
+
+let data=JSON.parse(localStorage.getItem("groceries")||"[]");
+
+data.unshift({date,name});
+
+localStorage.setItem("groceries",JSON.stringify(data));
+
+loadGroceries();
+
+date.value="";
