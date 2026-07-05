@@ -1,41 +1,284 @@
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Life OS</title>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCbfy9TvoodKFuy5sFvr-RwTWG_mz2mOLw",
-  authDomain: "mylifedashboard-94964.firebaseapp.com",
-  projectId: "mylifedashboard-94964",
-  storageBucket: "mylifedashboard-94964.firebasestorage.app",
-  messagingSenderId: "590572591968",
-  appId: "1:590572591968:web:59304a73eb99cfdb795c05",
-  measurementId: "G-PK617NT7KB"
-};
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,Segoe UI,sans-serif;
+}
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+  color:white;
+  padding:20px;
+}
 
-window.saveToFirebase = async function(category, text) {
-  await addDoc(collection(db, category), {
-    text: text,
-    createdAt: new Date()
-  });
-};
+.header{
+  max-width:1200px;
+  margin:auto;
+  margin-bottom:25px;
+}
 
-window.loadFromFirebase = async function(category) {
-  const querySnapshot = await getDocs(collection(db, category));
+.welcome{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(15px);
+  border-radius:25px;
+  padding:25px;
+  border:1px solid rgba(255,255,255,.15);
+}
 
-  let html = "";
+.welcome h1{
+  font-size:42px;
+}
 
-  querySnapshot.forEach((doc) => {
-    html += `<div class="item">${doc.data().text}</div>`;
-  });
+.welcome p{
+  color:#cbd5e1;
+  margin-top:10px;
+}
 
-  document.getElementById("items").innerHTML = html;
-};
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.stat{
+  background:rgba(255,255,255,.08);
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.stat h2{
+  font-size:30px;
+}
+
+.grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
+  height:180px;
+  border-radius:25px;
+  padding:25px;
+  cursor:pointer;
+  transition:.3s;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.03);
+}
+
+.card .emoji{
+  font-size:50px;
+}
+
+.card h3{
+  margin-top:15px;
+  font-size:24px;
+}
+
+.red{background:linear-gradient(135deg,#ef4444,#f97316);}
+.blue{background:linear-gradient(135deg,#0ea5e9,#2563eb);}
+.green{background:linear-gradient(135deg,#22c55e,#16a34a);}
+.gold{background:linear-gradient(135deg,#f59e0b,#facc15);}
+.pink{background:linear-gradient(135deg,#ec4899,#f43f5e);}
+.purple{background:linear-gradient(135deg,#8b5cf6,#6366f1);}
+.teal{background:linear-gradient(135deg,#14b8a6,#06b6d4);}
+.slate{background:linear-gradient(135deg,#475569,#1e293b);}
+
+.section{
+  display:none;
+  max-width:1200px;
+  margin:25px auto;
+  background:white;
+  color:black;
+  border-radius:25px;
+  padding:25px;
+}
+
+.section h2{
+  margin-bottom:20px;
+}
+
+.input-row{
+  display:flex;
+  gap:10px;
+}
+
+.input-row input{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+.input-row button{
+  background:#2563eb;
+  color:white;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.item{
+  background:#f8fafc;
+  padding:12px;
+  margin-top:10px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="welcome">
+    <h1>👋 Welcome Back, Tharun</h1>
+    <p>Your Personal Life OS</p>
+
+    <div class="stats">
+      <div class="stat">
+        <h2>🎬</h2>
+        Movies
+      </div>
+
+      <div class="stat">
+        <h2>✈️</h2>
+        Trips
+      </div>
+
+      <div class="stat">
+        <h2>💰</h2>
+        Expenses
+      </div>
+
+      <div class="stat">
+        <h2>✅</h2>
+        Tasks
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+
+<div class="card red" onclick="openCategory('Movies')">
+  <div class="emoji">🎬</div>
+  <h3>Movies</h3>
+</div>
+
+<div class="card blue" onclick="openCategory('Trips')">
+  <div class="emoji">✈️</div>
+  <h3>Trips</h3>
+</div>
+
+<div class="card gold" onclick="openCategory('Expenses')">
+  <div class="emoji">💰</div>
+  <h3>Expenses</h3>
+</div>
+
+<div class="card green" onclick="openCategory('Groceries')">
+  <div class="emoji">🛒</div>
+  <h3>Groceries</h3>
+</div>
+
+<div class="card pink" onclick="openCategory('Food')">
+  <div class="emoji">🍕</div>
+  <h3>What To Eat</h3>
+</div>
+
+<div class="card purple" onclick="openCategory('Planner')">
+  <div class="emoji">📅</div>
+  <h3>Tomorrow</h3>
+</div>
+
+<div class="card teal" onclick="openCategory('Tasks')">
+  <div class="emoji">✅</div>
+  <h3>Tasks</h3>
+</div>
+
+<div class="card slate" onclick="openCategory('Notes')">
+  <div class="emoji">📝</div>
+  <h3>Notes</h3>
+</div>
+
+</div>
+
+<div id="section" class="section">
+  <h2 id="title"></h2>
+
+  <div class="input-row">
+    <input id="userInput" placeholder="Add item...">
+    <button onclick="saveItem()">Add</button>
+  </div>
+
+  <div id="items"></div>
+</div>
+
+<script>
+
+let currentCategory="";
+
+function openCategory(category){
+
+ currentCategory=category;
+
+ document.getElementById("section").style.display="block";
+ document.getElementById("title").innerText=category;
+
+ loadItems();
+}
+
+function saveItem(){
+
+ const input=document.getElementById("userInput");
+
+ if(!input.value) return;
+
+ let items=JSON.parse(
+   localStorage.getItem(currentCategory) || "[]"
+ );
+
+ items.push(input.value);
+
+ localStorage.setItem(
+   currentCategory,
+   JSON.stringify(items)
+ );
+
+ input.value="";
+
+ loadItems();
+}
+
+function loadItems(){
+
+ let items=JSON.parse(
+   localStorage.getItem(currentCategory) || "[]"
+ );
+
+ document.getElementById("items").innerHTML=
+ items.map(x=>`<div class='item'>${x}</div>`).join("");
+}
+
 </script>
+
+</body>
+</html>
