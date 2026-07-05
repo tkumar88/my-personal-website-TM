@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test</title>
+    <title>Firebase Test</title>
 </head>
 <body>
-    <h1>Test Page Works</h1>
+
+<h1>Firebase Connected</h1>
+<p id="result">Loading...</p>
+
+<script type="module">
+
+import { db } from "./firebase-config.js";
+
+document.getElementById("result").innerHTML =
+"✅ Firebase Config Loaded Successfully";
+
+</script>
+
 </body>
 </html>
