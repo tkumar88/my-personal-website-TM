@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🍃 My Life OS</title>
 
 <style>
@@ -14,22 +14,22 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#eef4f2;
+background:#edf4f2;
 padding:25px;
-color:#333;
+color:#444;
 }
 
 .hero{
 background:rgba(184,228,217,.8);
-backdrop-filter:blur(15px);
+backdrop-filter:blur(20px);
 padding:40px;
 border-radius:30px;
 text-align:center;
-margin-bottom:30px;
+margin-bottom:25px;
 }
 
 .hero h1{
-font-size:55px;
+font-size:52px;
 }
 
 .hero p{
@@ -46,42 +46,57 @@ margin:auto;
 }
 
 .card{
-background:white;
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(20px);
 border-radius:24px;
 padding:25px;
-border-top:8px solid #9fd9cd;
 box-shadow:0 8px 20px rgba(0,0,0,.08);
+border-top:8px solid #9fd9cd;
+cursor:pointer;
+transition:.3s;
 }
 
-.card h3{
-font-size:30px;
-margin-top:10px;
+.card:hover{
+transform:translateY(-5px);
 }
 
 .icon{
-font-size:40px;
+font-size:42px;
+margin-bottom:10px;
+}
+
+.card h3{
+font-size:32px;
+margin-bottom:6px;
+}
+
+.card p{
+color:#777;
 }
 
 .panel{
-margin-top:15px;
 display:none;
+margin-top:15px;
+background:white;
+padding:20px;
+border-radius:20px;
 }
 
-input{
+.panel input{
 width:100%;
 padding:12px;
-margin:8px 0;
+margin:6px 0;
 border:1px solid #ddd;
 border-radius:12px;
 }
 
-button{
-padding:12px 18px;
+.panel button{
+padding:12px 20px;
+background:#9fd9cd;
 border:none;
 border-radius:12px;
-background:#9fd9cd;
-font-weight:bold;
 cursor:pointer;
+font-weight:600;
 }
 
 .entry{
@@ -89,28 +104,31 @@ margin-top:10px;
 padding:12px;
 background:#f7fbfa;
 border-left:4px solid #9fd9cd;
-border-radius:10px;
+border-radius:12px;
 }
 
 .activity{
 max-width:1400px;
 margin:30px auto;
 background:white;
-padding:20px;
+padding:25px;
 border-radius:24px;
 box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
 .activity h2{
-margin-bottom:15px;
+margin-bottom:20px;
 }
 
-.activityItem{
-padding:12px;
+.activity-item{
+display:flex;
+justify-content:space-between;
+padding:14px;
 border-bottom:1px solid #eee;
 }
 </style>
 </head>
+
 <body>
 
 <div class="hero">
@@ -120,240 +138,181 @@ border-bottom:1px solid #eee;
 
 <div class="grid">
 
-<div class="card">
+<div>
+<div class="card" onclick="togglePanel('movies')">
 <div class="icon">🎬</div>
 <h3>Movies</h3>
 <p>Movies I've watched</p>
+</div>
 
 <div class="panel" id="movies">
-<input type="date" id="moviesDate">
-<input placeholder="Movie Name" id="moviesText">
-<button onclick="addItem('movies')">Add Movie</button>
-<div id="moviesList"></div>
+<input type="date">
+<input placeholder="Movie Name">
+<button>Add Movie</button>
+
+<div class="entry">
+<strong>Interstellar</strong><br>
+04 Jul 2026
+</div>
+</div>
 </div>
 
-
-</div>
-
-<div class="card">
+<div>
+<div class="card" onclick="togglePanel('trips')">
 <div class="icon">✈️</div>
 <h3>Trips</h3>
+<p>Travel memories</p>
+</div>
 
 <div class="panel" id="trips">
-<input type="date" id="tripsDate">
-<input placeholder="Trip Name" id="tripsText">
-<button onclick="addItem('trips')">Add Trip</button>
-<div id="tripsList"></div>
+<input type="date">
+<input placeholder="Trip Name">
+<button>Add Trip</button>
+</div>
 </div>
 
-
-</div>
-
-<div class="card">
+<div>
+<div class="card" onclick="togglePanel('expenses')">
 <div class="icon">💰</div>
 <h3>Expenses</h3>
+<p>Money tracker</p>
+</div>
 
 <div class="panel" id="expenses">
-<input type="date" id="expensesDate">
-<input placeholder="Expense" id="expensesText">
-<button onclick="addItem('expenses')">Add Expense</button>
-<div id="expensesList"></div>
+<input type="date">
+<input placeholder="Description">
+<input placeholder="Amount">
+<button>Add Expense</button>
+</div>
 </div>
 
-
-</div>
-
-<div class="card">
+<div>
+<div class="card" onclick="togglePanel('groceries')">
 <div class="icon">🛒</div>
 <h3>Groceries</h3>
+<p>Shopping history</p>
+</div>
 
 <div class="panel" id="groceries">
-<input type="date" id="groceriesDate">
-<input placeholder="Grocery Item" id="groceriesText">
-<button onclick="addItem('groceries')">Add Grocery</button>
-<div id="groceriesList"></div>
+<input type="date">
+<input placeholder="Grocery Item">
+<button>Add Grocery</button>
+</div>
 </div>
 
-
-</div>
-
-<div class="card">
+<div>
+<div class="card" onclick="togglePanel('food')">
 <div class="icon">🍕</div>
 <h3>Food</h3>
+<p>What to eat</p>
+</div>
 
 <div class="panel" id="food">
-<input type="date" id="foodDate">
-<input placeholder="Food Item" id="foodText">
-<button onclick="addItem('food')">Add Food</button>
-<div id="foodList"></div>
+<input type="date">
+<input placeholder="Food Item">
+<button>Add Food</button>
+</div>
 </div>
 
-
-</div>
-
-<div class="card">
+<div>
+<div class="card" onclick="togglePanel('cricket')">
 <div class="icon">🏏</div>
 <h3>Cricket</h3>
+<p>Matches & practice</p>
+</div>
 
 <div class="panel" id="cricket">
-<input type="date" id="cricketDate">
-<input placeholder="Match / Practice" id="cricketText">
-<button onclick="addItem('cricket')">Add Cricket</button>
-<div id="cricketList"></div>
+<input type="date">
+<input placeholder="Match / Practice">
+<button>Add Cricket Entry</button>
+</div>
 </div>
 
-
-</div>
-
-<div class="card">
+<div>
+<div class="card" onclick="togglePanel('notes')">
 <div class="icon">📝</div>
 <h3>Notes</h3>
+<p>Ideas & thoughts</p>
+</div>
 
 <div class="panel" id="notes">
-<input type="date" id="notesDate">
-<input placeholder="Note" id="notesText">
-<button onclick="addItem('notes')">Add Note</button>
-<div id="notesList"></div>
+<input type="date">
+<input placeholder="Note">
+<button>Add Note</button>
+</div>
 </div>
 
-
-</div>
-
-<div class="card">
+<div>
+<div class="card" onclick="togglePanel('goals')">
 <div class="icon">✅</div>
 <h3>Goals</h3>
+<p>Things to achieve</p>
+</div>
 
 <div class="panel" id="goals">
-<input type="date" id="goalsDate">
-<input placeholder="Goal" id="goalsText">
-<button onclick="addItem('goals')">Add Goal</button>
-<div id="goalsList"></div>
+<input type="date">
+<input placeholder="Goal">
+<button>Add Goal</button>
+</div>
 </div>
 
-
-</div>
-
-<div class="card">
+<div>
+<div class="card" onclick="togglePanel('tomorrow')">
 <div class="icon">📅</div>
 <h3>Tomorrow</h3>
-
-<div class="panel" id="tomorrow">
-<input type="date" id="tomorrowDate">
-<input placeholder="Task" id="tomorrowText">
-<button onclick="addItem('tomorrow')">Add Task</button>
-<div id="tomorrowList"></div>
+<p>Plan next day</p>
 </div>
 
-
+<div class="panel" id="tomorrow">
+<input type="date">
+<input placeholder="Tomorrow Task">
+<button>Add Task</button>
+</div>
 </div>
 
 </div>
 
 <div class="activity">
+
 <h2>🌿 Recent Activity</h2>
-<div id="activityFeed"></div>
+
+<div class="activity-item">
+<span>🎬 Interstellar</span>
+<span>04 Jul 2026</span>
+</div>
+
+<div class="activity-item">
+<span>✈️ Chicago Trip</span>
+<span>03 Jul 2026</span>
+</div>
+
+<div class="activity-item">
+<span>💰 Costco - $82</span>
+<span>02 Jul 2026</span>
+</div>
+
+<div class="activity-item">
+<span>🏏 Cricket Practice</span>
+<span>01 Jul 2026</span>
+</div>
+
 </div>
 
 <script>
-
 function togglePanel(id){
+
+document.querySelectorAll('.panel').forEach(panel=>{
+if(panel.id!==id){
+panel.style.display='none';
+}
+});
+
 const panel=document.getElementById(id);
+
 panel.style.display=
-panel.style.display==="block" ? "none" : "block";
-}
-
-function addItem(category){
-
-const date=document.getElementById(category+'Date').value;
-const text=document.getElementById(category+'Text').value;
-
-if(!date || !text){
-alert("Fill both fields");
-return;
-}
-
-let data=
-JSON.parse(localStorage.getItem(category) || "[]");
-
-data.unshift({
-date:text ? date : '',
-text:text
-});
-
-localStorage.setItem(
-category,
-JSON.stringify(data)
-);
-
-document.getElementById(category+'Text').value='';
-
-loadItems(category);
-loadActivity();
-}
-
-function loadItems(category){
-
-const list=document.getElementById(category+'List');
-
-if(!list) return;
-
-const data=
-JSON.parse(localStorage.getItem(category) || "[]");
-
-list.innerHTML='';
-
-data.forEach(item=>{
-
-list.innerHTML += `
-<div class="entry">
-<strong>${item.text}</strong><br>
-${item.date}
-</div>
-`;
-
-});
-}
-
-function loadActivity(){
-
-const feed=document.getElementById('activityFeed');
-
-feed.innerHTML='';
-
-[
-'movies','trips','expenses',
-'groceries','food','cricket',
-'notes','goals','tomorrow'
-].forEach(cat=>{
-
-let data=
-JSON.parse(localStorage.getItem(cat) || "[]");
-
-if(data.length){
-
-feed.innerHTML += `
-<div class="activityItem">
-${data[0].text}
-<br>
-<small>${data[0].date}</small>
-</div>
-`;
-
-}
-
-});
-}
-
-window.onload=function(){
-
-[
-'movies','trips','expenses',
-'groceries','food','cricket',
-'notes','goals','tomorrow'
-].forEach(loadItems);
-
-loadActivity();
-
+panel.style.display==='block'
+? 'none'
+: 'block';
 }
 </script>
 
